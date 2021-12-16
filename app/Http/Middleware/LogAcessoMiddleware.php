@@ -22,6 +22,10 @@ class LogAcessoMiddleware
             'log' =>$request->url(),
             'ip' => $request->ip()
         ]);
-        return Response('Acesso negadO pelo Middleware!',403);
+        $resposta = $next($request);
+
+        $resposta->setStatusCode(201, 'O Status foi alterado');
+
+        return $resposta;
     }
 }
