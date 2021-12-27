@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+
 
 class LoginController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('site.login', ['titulo' => 'Login']);
+        $erro = '';
+        
+        if($request->get('erro') == 1) {
+            $erro = 'Usuário ou senha inválidos!';
+        }
+        return view('site.login', ['titulo' => 'Login', 'erro' => $erro]);
     }
 
     public function autenticar(Request $request)
@@ -27,7 +34,25 @@ class LoginController extends Controller
             'senha.max' => 'O campo senha deve ter no máximo 20 caracteres'
         ];
 
+        //validação de regras
         $request->validate($regras, $mensagens);
+        
+        //recuperando parâmetros do formulário em variáveis
+        $email = $request->get('usuario');
+        $password = $request->get('senha');
+
+        //iniciar o model User
+        $user = new User();
+
+        //verificar se o usuário existe
+        $usuario = $user->where('email', $email)->where('password', $password)->get()->first();
+
+        if(isset($usuario->name)) {
+            echo 'usuário existe';
+        } else {
+            return redirect()->route('site.login', ['erro' => 1]);
+        }
+
 
         print_r($request->all());
     }

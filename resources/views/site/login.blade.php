@@ -26,6 +26,7 @@
                         <button type="submit" class="borda-preta">Entrar</button>
                     </div>
                 </form>
+                {{isset($erro) && $erro != '' ? $erro : ''}}
             </div>
 
         </div>
