@@ -17,10 +17,10 @@ class FornecedorController extends Controller
             ->where('site', 'like', '%'.$request->input('site').'%')
             ->where('uf', 'like', '%'.$request->input('uf').'%')
             ->where('email', 'like', '%'.$request->input('email').'%')
-            ->get();
+            ->paginate(2);
             
 
-        return view('app.fornecedor.listar', ['fornecedores' => $fornecedores]);
+        return view('app.fornecedor.listar', ['fornecedores' => $fornecedores, 'request' => $request->all()]);
 
     }
 
@@ -62,7 +62,7 @@ class FornecedorController extends Controller
             $update = $fornecedor->update($request->all());
 
             if($update) {
-                $msgSucess = 'Fornecedor editado com sucesso.';
+                $msgSucess = 'Atualização de fornecedor editado com sucesso.';
             } else {
                 $msgSucess = 'Erro ao editar fornecedor.';
             }
@@ -80,5 +80,12 @@ class FornecedorController extends Controller
         return view('app.fornecedor.adicionar', ['fornecedor' => $fornecedor, 'msgSucess' => $msgSucess]);
 
 
+    }
+
+    public function excluir($id) {
+        $fornecedor = Fornecedor::find($id);
+        $fornecedor->delete();
+
+        return redirect()->route('app.fornecedor.listar');
     }
 }
