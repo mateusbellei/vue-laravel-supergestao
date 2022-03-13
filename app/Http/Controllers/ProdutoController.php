@@ -10,7 +10,7 @@ class ProdutoController extends Controller
 {
     public function index(Request $request) {
         $produtos = Produto::paginate(10);
-        return view('produto.index',['produtos' => $produtos, 'request' => $request->all()]);
+        return view('app.produto.index',['produtos' => $produtos, 'request' => $request->all()]);
     }
 
     public function create() {

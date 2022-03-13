@@ -30,7 +30,7 @@
                     </thead>
 
                     <tbody>
-                        @foreach($produto as $produto)
+                        @foreach($produtos as $produto)
                             <tr>
                                 <td>{{$produto->nome}}</td>
                                 <td>{{$produto->descricao}}</td>
