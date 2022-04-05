@@ -43,6 +43,8 @@ Route::middleware('autenticacao:padrao,visitante,p3,p4')->prefix('/app')->group(
 
     //produtos
     Route::resource('produto', 'ProdutoController');
+    Route::get('/produto/adicionar', 'ProdutoController@adicionar')->name('app.produto.adicionar');
+    Route::post('/produto/adicionar', 'ProdutoController@adicionar')->name('app.produto.adicionar');
 });
 
 Route::get('/teste/{p1}/{p2}', 'TesteController@teste')->name('site.teste');
