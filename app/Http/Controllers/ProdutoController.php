@@ -56,9 +56,9 @@ class ProdutoController extends Controller
         return redirect()->route('produto.index');
     }
 
-    public function destroy($id) {
-        echo '<h1>Excluir produto</h1>';
-        echo '<h2>ID: '.$id.'</h2>';
+    public function destroy(Produto $produto) {
+        $produto->delete();
+        return redirect()->route('produto.index');
     }
 
     public function listar() {
