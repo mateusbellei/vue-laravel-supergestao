@@ -51,12 +51,9 @@ class ProdutoController extends Controller
         return view ('app.produto.edit',['produto' => $produto, 'unidades' => $unidades]);
     }
 
-    public function update(Request $request, $id) {
-        echo '<h1>Atualizar produto</h1>';
-        echo '<h2>ID: '.$id.'</h2>';
-        echo '<pre>';
-        print_r($request->all());
-        echo '</pre>';
+    public function update(Request $request, Produto $produto) {
+        $produto->update($request->all());
+        return redirect()->route('produto.index');
     }
 
     public function destroy($id) {
