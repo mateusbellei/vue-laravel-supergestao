@@ -46,9 +46,9 @@ class ProdutoController extends Controller
         return view('app.produto.show',['produto' => $produto]);
     }
 
-    public function edit($id) {
-        echo '<h1>Editar produto</h1>';
-        echo '<h2>ID: '.$id.'</h2>';
+    public function edit(Produto $produto) {
+        $unidades = Unidade::all();
+        return view ('app.produto.edit',['produto' => $produto, 'unidades' => $unidades]);
     }
 
     public function update(Request $request, $id) {
